@@ -17,10 +17,10 @@ public final class DoubleXP extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        saveDefaultConfig();
         instance = this;
         new CommandBootloader();
         new ListenerBootloader();
-        saveDefaultConfig();
         MessageHelper.console("&6Plugin status: &aActive");
     }
 
