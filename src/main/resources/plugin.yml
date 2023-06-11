@@ -1,4 +1,4 @@
 name: DoubleXP
 version: '${version}'
 main: dev.ezpadaz.doublexp.DoubleXP
-api-version: 1.20
+api-version: "1.20"
