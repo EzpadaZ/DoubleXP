@@ -51,7 +51,14 @@ public class XPCommand {
                     case "status":
                         MessageHelper.send(sender, "Double XP Event: &c" + DoubleXPEvent.isEnabled);
                         return true;
-
+                    case "get":
+                        if (jugador != null) {
+                            int totalExpPoints = ExperienceHelper.getPlayerExp(jugador);
+                            DecimalFormat formatter = new DecimalFormat("#,###");
+                            String formattedExp = formatter.format(totalExpPoints);
+                            MessageHelper.send(sender, "Tienes: " + formattedExp + " EXP");
+                        }
+                        return true;
                     case "optin":
                         if (jugador != null) {
                             if (DoubleXPEvent.playerNames.contains(jugador.getName())) {
@@ -73,19 +80,13 @@ public class XPCommand {
                         }
                         return true;
                     default:
-                        if (jugador != null) {
-                            int totalExpPoints = ExperienceHelper.getPlayerExp(jugador);
-                            DecimalFormat formatter = new DecimalFormat("#,###");
-                            String formattedExp = formatter.format(totalExpPoints);
-                            MessageHelper.send(sender, "Tienes: " + formattedExp + " EXP");
-                        }
                         return true;
                 }
             }
 
             @Override
             public String getUsage() {
-                return "/dxp {ver | status}";
+                return "/dxp {get | status}";
             }
         };
     }
