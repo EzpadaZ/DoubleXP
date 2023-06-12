@@ -20,7 +20,7 @@ public class XPCommand {
                 Player jugador = sender.getServer().getPlayer(sender.getName());
 
                 switch (cmd) {
-                    case "activate":
+                    case "enable":
                         if (sender instanceof ConsoleCommandSender) {
                             // only allow enable by console.
                             if (DoubleXPEvent.isEnabled) {
@@ -35,7 +35,7 @@ public class XPCommand {
                             }
                         }
                         return true;
-                    case "deactivate":
+                    case "disable":
                         if (sender instanceof ConsoleCommandSender) {
                             // only allow disable by console.
                             if (DoubleXPEvent.isEnabled) {
