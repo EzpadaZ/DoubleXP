@@ -1,2 +1,4 @@
 multiplier: 2
 log: true
+death-cooldown: 3
+debug: true

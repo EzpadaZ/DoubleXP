@@ -13,6 +13,12 @@ public class MessageHelper {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + message));
     }
 
+    public static void consoleDebug(String message) {
+        boolean isDebugEnabled = DoubleXP.getInstance().config.getBoolean("debug");
+
+        if (isDebugEnabled) console(message);
+    }
+
     public static void console(String message) {
         send(DoubleXP.getInstance().getServer().getConsoleSender(), "&6[&5DXP&6]&f " + message, "&a");
     }

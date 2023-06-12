@@ -9,6 +9,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class XPCommand {
     public XPCommand() {
@@ -31,7 +32,7 @@ public class XPCommand {
                             }
                         } else {
                             if (sender instanceof Player p) {
-                                MessageHelper.send(p, "Este comando solo se puede ejecutar desde consola");
+                                MessageHelper.send(p, "This is a console-command only.");
                             }
                         }
                         return true;
@@ -41,10 +42,12 @@ public class XPCommand {
                             if (DoubleXPEvent.isEnabled) {
                                 DoubleXPEvent.isEnabled = false;
                                 MessageHelper.console("Double XP Event disabled!");
+                                DoubleXPEvent.bannedPlayers = new ArrayList<>();
+                                MessageHelper.consoleDebug("Banned Player List from Event has been wiped.");
                             }
                         } else {
                             if (sender instanceof Player p) {
-                                MessageHelper.send(p, "Este comando solo se puede ejecutar desde consola");
+                                MessageHelper.send(p, "This is a console-command only.");
                             }
                         }
                         return true;
@@ -61,21 +64,32 @@ public class XPCommand {
                         return true;
                     case "optin":
                         if (jugador != null) {
-                            if (DoubleXPEvent.playerNames.contains(jugador.getName())) {
+                            if (DoubleXPEvent.optedInPlayers.contains(jugador.getName())) {
                                 MessageHelper.send(jugador, "You are already receiving XP Updates");
                             } else {
-                                DoubleXPEvent.playerNames.add(jugador.getName());
+                                DoubleXPEvent.optedInPlayers.add(jugador.getName());
                                 MessageHelper.send(jugador, "You have opted-in to receive XP Updates");
                             }
                         }
                         return true;
                     case "optout":
                         if (jugador != null) {
-                            if (DoubleXPEvent.playerNames.contains(jugador.getName())) {
-                                DoubleXPEvent.playerNames.remove(jugador.getName());
+                            if (DoubleXPEvent.optedInPlayers.contains(jugador.getName())) {
+                                DoubleXPEvent.optedInPlayers.remove(jugador.getName());
                                 MessageHelper.send(jugador, "You have opted out of receiving XP Updates");
                             } else {
                                 MessageHelper.send(jugador, "You can't opt-out if you are not receiving updates already.");
+                            }
+                        }
+                        return true;
+                    case "wipecd":
+                        if (sender instanceof ConsoleCommandSender) {
+                            // only allow disable by console.
+                            DoubleXPEvent.bannedPlayers = new ArrayList<>();
+                            MessageHelper.console("Wiped banned players from 2XP Event");
+                        } else {
+                            if (sender instanceof Player p) {
+                                MessageHelper.send(p, "This is a console-command only.");
                             }
                         }
                         return true;
